@@ -6,10 +6,10 @@ const app = express();
 
 // MySQL Connection
 const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'your_username',
-  password: 'your_password',
-  database: 'your_database'
+  host: process.env.HOST,
+  user: process.env.USER,
+  password: process.env.PASSWORD,
+  database: process.env.DATABASE
 });
 
 // Connect
@@ -31,7 +31,7 @@ app.post('/analyze-image', async (req, res) => {
 
   try {
     // Make a request to the AI analysis API
-    const apiResponse = await axios.post('http://example.com/', { image_path: imagePath });
+    const apiResponse = await axios.post(process.env.AI_ANALYSIS_API, { image_path: imagePath });
 
     const responseData = apiResponse.data;
 
